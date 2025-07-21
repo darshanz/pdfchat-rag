@@ -51,3 +51,6 @@ This will start all containers. Access the app at http://localhost:5000
 - Save chat history for given pdf
 - Extracts images and tables from the document and Include in chat responses
 
+## 📜 License
+
+This project is licensed under the [MIT License](LICENSE).
