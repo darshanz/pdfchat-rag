@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/light.css" />
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"></script>
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+        <title>{% block title %}{% endblock %} - PDF Chat</title>
+        {% block additional_head %}{% endblock %} 
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="{{url_for('index')}}">📄 PDF Chat</a> 
+  </header>
+
+  <!-- Main Layout -->
+  <div class="dashboard">
+    
+    <!-- Left Sidebar -->
+    <aside class="sidebar-left">
+      {% for paper in papers %}
+            <a href="{{ url_for('paper_chat', paper_id=paper.paper_id) }}" class="paper-link">
+                📄 {{ paper.filename }}
+            </a>
+        {% else %}
+            <p>No papers found.</p>
+        {% endfor %}
+    </aside>
+
+    <!-- Center Content -->
+    <main class="main-content">
+     {% block content %} {% endblock %}
+    </main>
+
+    <!-- Right Sidebar with Chat -->
+    <aside class="sidebar-right">
+       {% block right_sidebar %} {% endblock %} 
+    </aside>
+
+  </div>
+      <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/dialog/dialog.js"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/alert/alert.js"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/alert_launcher.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+        {% block additional_scripts %}{% endblock %}
+</body>
+</html>

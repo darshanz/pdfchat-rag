@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}  Home  {% endblock %}
+{% block content %}
+ 
+ <section style="max-width: 600px; margin: 0 auto; text-align: center;"> 
+  <p style="color: var(--sl-color-neutral-600); margin-bottom: 2rem;">
+    Upload a PDF document and let AI break it down for you — fast, clear, and insightful.
+  </p>
+
+  <form action="{{ url_for('upload_document') }}" id="formUploadPaper" method="post" enctype="multipart/form-data">
+    <div id="drop-zone" class="drop-zone">
+      <label id="file-label" for="file-input" style="display: block; font-size: 1.1rem; color: var(--sl-color-neutral-700);">
+        📥 Drag & drop a PDF here or click to select
+      </label>
+      <input type="file" id="file-input" accept=".pdf" style="display: none;" />
+    </div>
+  </form>
+
+  <sl-button variant="primary" size="large" id="btnUploadPaper">Upload Paper</sl-button>
+</section>
+
+{% endblock %}
+
+{% block additional_scripts %}
+  <script type="text/javascript" src="{{ url_for('static', filename='js/upload_paper.js') }}"></script>
+{% endblock %}

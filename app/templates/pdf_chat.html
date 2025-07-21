@@ -1,0 +1,34 @@
+
+{% extends 'base.html' %}
+{% block title %}  Home  {% endblock %}
+{% block additional_head %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/5.3.93/pdf_viewer.min.css">
+
+ 
+{% endblock %}
+{% block content %} 
+   <div id="pdf-canvas" data-pdf="{{url_for('serve_pdf', paper_id=paper_id)}}"></div> 
+{% endblock %}
+
+ {% block right_sidebar %} 
+    
+    <div class="chat-container">
+        <div id="chat-messages" class="chat-messages">
+            <div class="chat-bubble">Hello! How can I assist you today?</div>
+        </div>
+    </div>
+    <sl-progress-bar id="chat_progressbar" style="--height: 0.25rem;" indeterminate="" value="0"></sl-progress-bar>
+    <div class="chat-input-area">
+        <sl-input id="chat-input" data-paperid="{{paper_id}}" placeholder="Type your message..." size="small" pill style="flex: 1;"></sl-input>
+        <sl-button variant="primary" size="small" pill id="send-btn">Send</sl-button>
+        <sl-spinner style="font-size: 30px; --track-width: 10px;" size="small" id="chat-spinner"></sl-spinner>
+    </div>
+ 
+ {% endblock %}
+
+{% block additional_scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/pdf_handler.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/chat_handler.js') }}"></script> 
+{% endblock %}
+

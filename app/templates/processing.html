@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}  Home  {% endblock %}
+{% block content %}
+  
+<h3>Processing your document.</h3>
+ <sl-progress-bar id="progress-bar" value="0" style="width: 100%;" data-redirecturl="{{ url_for('paper_chat', paper_id=paper_id) }}"></sl-progress-bar>
+{% endblock %}
+
+{% block additional_scripts %}
+ <script type="text/javascript" src="{{ url_for('static', filename='js/upload_progress.js') }}"></script> 
+{% endblock %}

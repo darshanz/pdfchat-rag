@@ -1,0 +1,13 @@
+flask
+pymongo
+redis
+celery
+requests
+langchain
+langchain_ollama
+chromadb
+flask-socketio
+eventlet
+sentence-transformers
+pdfplumber
+markdown

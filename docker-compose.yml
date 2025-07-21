@@ -1,0 +1,72 @@
+services:
+  flask-app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app:/app
+      - ./uploads:/uploads
+    environment:
+      - OLLAMA_HOST=http://ollama-server:11434
+      - OLLAMA_MODEL=gemma3n:latest
+      - REDIS_URL=redis://redis:6379/0
+      - MONGO_URI=mongodb://mongo:27017/paperdb
+      - CHROMA_HOST=chroma-db
+      - CHROMA_PORT=8000
+      - UPLOAD_FOLDER=/uploads
+    depends_on:
+      - redis
+      - mongo
+      - chroma-db
+      - ollama-server
+      - celery-worker
+
+  celery-worker:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    command: celery -A celery_worker.celery_app worker --loglevel=info
+    volumes:
+      - ./app:/app
+      - ./uploads:/uploads
+    environment:
+      - OLLAMA_HOST=http://ollama-server:11434
+      - OLLAMA_MODEL=gemma3n:latest
+      - REDIS_URL=redis://redis:6379/0
+      - MONGO_URI=mongodb://mongo:27017/paperdb
+      - CHROMA_HOST=chroma-db
+      - CHROMA_PORT=8000
+    depends_on:
+      - redis
+      - mongo
+      - chroma-db
+      - ollama-server
+
+  ollama-server:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./ollama_models:/root/.ollama/models
+    restart: unless-stopped
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo_data:/data/db
+
+  chroma-db:
+    image: chromadb/chroma
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./chroma_data:/chroma/chroma
