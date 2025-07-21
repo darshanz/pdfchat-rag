@@ -7,9 +7,9 @@ A simple example of Retrieval-Augmented Generation (RAG) application with basic 
 ## 🚀 Features
 
 - 📄 **Upload PDFs** and extract embedded text
-- 🔍 **Semantic search** over vector embeddings using ChromaDB
+- 🔍 **Semantic search** over vector embeddings using [ChromaDB](https://www.trychroma.com/)
 - 💬 **Chat interface** for querying document content via RAG
-- 🧠 **LLM integration** using [Ollama](https://ollama.com/) (supporting local models like `llama3`, `mistral`, etc.)
+- 🧠 **LLM integration** using [Ollama](https://ollama.com/)  
 - 🧰 **Background processing** with Celery & Redis
 - 🗂️ **Metadata storage** in MongoDB
 
