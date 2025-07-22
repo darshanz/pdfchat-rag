@@ -38,6 +38,9 @@ git clone https://github.com/darshanz/pdfchat-rag.git
 cd pdfchat-rag
 ```
 
+- NB. Create relevant directories for storing the uploaded files in the host machine and map them to the flask-app docker ocntainer. Similarly map the directories for mongodb and ollama-models directories.
+
+
 ### Start the App
 ``` bash
 docker-compose up --build
